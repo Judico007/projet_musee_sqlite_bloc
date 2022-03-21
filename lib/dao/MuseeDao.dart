@@ -3,7 +3,6 @@
 import 'package:sqflite/sqflite.dart';
 import '../database/database.dart';
 import '../models/musee.dart';
-import '../models/pays.dart';
 
 class MuseeDao {
   final databaseProvider = DatabaseProvider.databaseProvider;
@@ -89,7 +88,7 @@ class MuseeDao {
     final db = await databaseProvider.database;
 
     int affectedRowsCount = await db.delete(
-      Pays.table,
+      Musee.table,
       where: 'numMus = ?',
       whereArgs: [musee.numMus],
     );

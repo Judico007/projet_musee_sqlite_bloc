@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projet_musee_sqlite_bloc/ui/widgets/card.dart';
-import '../bloc/PaysBloc.dart';
 import '../repository/MuseeRepository.dart';
 import '../database/database.dart';
 import '../models/musee.dart';
@@ -19,8 +18,6 @@ class _MuseeListState extends State<MuseeList> {
   late MuseeRepository _museeRepository;
   late List<Musee> _list;
   bool _isLoading = false;
-
-  final PaysBloc paysBloc = PaysBloc();
 
   @override
   void initState() {

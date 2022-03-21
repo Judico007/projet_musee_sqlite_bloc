@@ -1,12 +1,10 @@
 import '../dao/MuseeDao.dart';
-import '../dao/PaysDao.dart';
 import '../models/musee.dart';
-import '../models/pays.dart';
 
 class MuseeRepository {
   final museeDao = MuseeDao();
 
-  Future getAllMusees() => museeDao.getMusees();
+  Future<List<Musee>> getAllMusees() => museeDao.getMusees();
 
   Future insertMusee(Musee musee) => museeDao.insertMusee(musee);
 

@@ -1,26 +1,27 @@
 import 'dart:async';
 
-import '../repository/PaysRepository.dart';
 import '../models/pays.dart';
+import '../repository/PaysRepository.dart';
 
 class PaysBloc {
   //Get instance of the Repository
-  final _paysRepository = MuseeRepository();
+  final _paysRepository = PaysRepository();
 
   //Stream controller is the 'Admin' that manages
   //the state of our stream of data like adding
   //new data, change the state of the stream
   //and broadcast it to observers/subscribers
-  final _todoController = StreamController<List<Pays>>.broadcast();
+  final _paysController = StreamController<List<Pays>>.broadcast();
 
-  get pays => _todoController.stream;
+  get pays => _paysController.stream;
 
   PaysBloc() {
     getPays();
   }
 
-  getPays() async {
-    _todoController.sink.add(await _paysRepository.getAllPays());
+  Future<List<Pays>> getPays() async {
+    _paysController.sink.add(await _paysRepository.getAllPays());
+    return _paysRepository.getAllPays();
   }
 
   addPays(Pays pays) async {
@@ -37,12 +38,14 @@ class PaysBloc {
     _paysRepository.deletePays(pays);
     getPays();
   }
-/*
-  getPaysFromOtherTables(String code) async {
-    _paysRepository.getPaysFromOtherTables(code);
-  }*/
+
+  /*
+  Future<bool> getPaysFromOtherTables(String code) async {
+    return _paysRepository.getPaysFromOtherTables(code);
+  }
+  */
 
   dispose() {
-    _todoController.close();
+    _paysController.close();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../repository/PaysRepository.dart';
 import '../database/database.dart';
 import '../models/pays.dart';
+import '../repository/PaysRepository.dart';
 
 class PaysList extends StatefulWidget {
   const PaysList({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class PaysList extends StatefulWidget {
 class _PaysListState extends State<PaysList> {
   late DatabaseProvider databaseProvider = DatabaseProvider();
 
-  late MuseeRepository _paysRepository;
+  late PaysRepository _paysRepository;
   late List<Pays> _list;
   bool _isLoading = false;
 
@@ -22,7 +22,7 @@ class _PaysListState extends State<PaysList> {
     super.initState();
     _list = [];
     databaseProvider = DatabaseProvider();
-    _paysRepository = MuseeRepository();
+    _paysRepository = PaysRepository();
     _refresh();
   }
 
@@ -42,7 +42,7 @@ class _PaysListState extends State<PaysList> {
             itemCount: _list.length,
             itemBuilder: (context, index) => Card(
               color: Colors.orange[200],
-              margin: EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               child: ListTile(
                   title: Text(_list[index].codePays),
                   subtitle: Text(

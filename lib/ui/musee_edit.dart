@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../bloc/PaysBloc.dart';
 import '../database/database.dart';
 import '../models/musee.dart';
 import '../repository/MuseeRepository.dart';
@@ -25,7 +24,6 @@ class _MuseeEditState extends State<MuseeEdit> {
   late DatabaseProvider databaseProvider = DatabaseProvider();
 
   late MuseeRepository _museeRepository;
-  late List<Musee> _list;
 
   @override
   void initState() {
@@ -131,13 +129,14 @@ class _MuseeEditState extends State<MuseeEdit> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Container(
-                                  margin: EdgeInsets.symmetric(vertical: 10),
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   child: !_isSubmitting
                                       ? ElevatedButton(
                                           child: const Text('Enregitrer'),
                                           onPressed: _save,
                                         )
-                                      : CircularProgressIndicator()),
+                                      : const CircularProgressIndicator()),
                             ])
                       ])))
             ],

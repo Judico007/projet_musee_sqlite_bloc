@@ -120,28 +120,24 @@ class DatabaseProvider {
   Future<void> insertDefaultData(Database db) async {
     List<Pays> countries = [
       const Pays(codePays: "bj", nbHabitant: 12123200),
-      const Pays(codePays: "cn", nbHabitant: 1439323776),
-      const Pays(codePays: "de", nbHabitant: 83783942),
-      const Pays(codePays: "gh", nbHabitant: 31072940),
-      const Pays(codePays: "ke", nbHabitant: 53771296),
+      const Pays(codePays: "cn", nbHabitant: 1439323),
+      const Pays(codePays: "ke", nbHabitant: 71296),
       const Pays(codePays: "ng", nbHabitant: 206139589),
       const Pays(codePays: "ru", nbHabitant: 145934462),
       const Pays(codePays: "tg", nbHabitant: 8278724),
-      const Pays(codePays: "us", nbHabitant: 331002651),
-      const Pays(codePays: "za", nbHabitant: 59308690),
+      const Pays(codePays: "us", nbHabitant: 331002650),
     ];
 
     List<Musee> museums = [
       const Musee(
-          numMus: 1,
-          nomMus: "Musée de l'UNESCO",
-          nbLivres: 560,
-          codePays: "bj"),
+          numMus: 1, nomMus: "Musée Da Silva", nbLivres: 560, codePays: "bj"),
       const Musee(
           numMus: 2,
           nomMus: "United State of America Museum",
           nbLivres: 36000,
           codePays: "us"),
+      const Musee(
+          numMus: 3, nomMus: "Musée de Ouidah", nbLivres: 4000, codePays: "bj"),
     ];
 
     // ---- Insertions -----
