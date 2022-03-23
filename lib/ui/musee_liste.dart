@@ -42,12 +42,10 @@ class _MuseeListState extends State<MuseeList> {
     return !_isLoading
         ? ListView.builder(
             padding: const EdgeInsets.all(18.0),
-            //cardTable.length
             itemCount: _list.length,
             itemBuilder: (BuildContext context, int index) {
               return InkWell(
                 onTap: () {
-                  //Navigator.pushNamed(context, '/edit_musee');
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -68,7 +66,6 @@ class _MuseeListState extends State<MuseeList> {
 
   @override
   void dispose() {
-    // DatabaseProvider.databaseProvider.close();
     super.dispose();
   }
 }

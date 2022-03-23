@@ -1,18 +1,23 @@
+import 'dart:convert';
+
+Moment momentFromJson(String str) => Moment.fromJson(json.decode(str));
+
+String momentToJson(Moment data) => json.encode(data.toJson());
+
 class Moment {
   static String table = "Moment";
 
-  final String jour;
+  Moment({
+    required this.jour,
+  });
 
-  const Moment(
-      { // required this.id,
-      required this.jour});
+  String jour;
 
-  Map<String, dynamic> toMap() {
-    return {'jour': jour};
-  }
+  factory Moment.fromJson(Map<String, dynamic> json) => Moment(
+        jour: json["jour"],
+      );
 
-  @override
-  String toString() {
-    return 'Moment{jour: $jour}';
-  }
+  Map<String, dynamic> toJson() => {
+        "jour": jour,
+      };
 }

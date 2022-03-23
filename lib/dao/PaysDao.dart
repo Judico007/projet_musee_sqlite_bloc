@@ -3,7 +3,6 @@
 import 'package:sqflite/sqflite.dart';
 
 import '../database/database.dart';
-import '../models/musee.dart';
 import '../models/pays.dart';
 
 class PaysDao {
@@ -16,7 +15,7 @@ class PaysDao {
 
   Future<int> insertPays(Pays pays) async {
     final db = await databaseProvider.database;
-    return await db.insert(Pays.table, pays.toMap(),
+    return await db.insert(Pays.table, pays.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
@@ -37,7 +36,6 @@ class PaysDao {
     });
   }
 
-  /*
   Future<Pays> getPaysByCode(String code) async {
     final db = await databaseProvider.database;
     final maps =
@@ -49,15 +47,13 @@ class PaysDao {
       return Pays.fromJson(maps.first);
     }
   }
-  */
 
-  /*
   Future<bool> getPaysFromOtherTables(String code) async {
     final db = await databaseProvider.database;
     var maps =
         await db.query("MUSEE", where: 'codePays = ?', whereArgs: [code]);
 
-    Pays pays = Pays(codePays: '', nbhabitant: 0);
+    Pays pays = const Pays(codePays: '', nbHabitant: 0);
     if (maps.isNotEmpty) {
       pays = Pays.fromJson(maps.first);
       return true;
@@ -74,13 +70,12 @@ class PaysDao {
       }
     }
   }
-  */
 
   Future<void> updatePays(Pays pays) async {
     final db = await databaseProvider.database;
     await db.update(
       Pays.table,
-      pays.toMap(),
+      pays.toJson(),
       where: 'codePays = ?',
       whereArgs: [pays.codePays],
     );

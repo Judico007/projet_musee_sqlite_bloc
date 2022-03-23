@@ -12,7 +12,6 @@ class PaysRepository {
 
   Future deletePays(Pays pays) => paysDao.deletePays(pays);
 
-  /* Future<bool> getPaysFromOtherTables(String code) =>
+  Future<bool> getPaysFromOtherTables(String code) =>
       paysDao.getPaysFromOtherTables(code);
- */
 }

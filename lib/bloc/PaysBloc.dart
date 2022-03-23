@@ -39,11 +39,9 @@ class PaysBloc {
     getPays();
   }
 
-  /*
   Future<bool> getPaysFromOtherTables(String code) async {
     return _paysRepository.getPaysFromOtherTables(code);
   }
-  */
 
   dispose() {
     _paysController.close();

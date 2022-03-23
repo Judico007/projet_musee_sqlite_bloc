@@ -29,33 +29,14 @@ class DatabaseProvider {
 
   Future _create(Database db, int version) async {
     await db.execute(sqlCreatePaysTable());
+    await db.execute(sqlCreateMuseeTable());
     await db.execute(sqlCreateOuvrageTable());
     await db.execute(sqlCreateBibliothequeTable());
-    await db.execute(sqlCreateMuseeTable());
-    await db.execute(sqlCreateVisiterTable());
     await db.execute(sqlCreateMomentTable());
+    await db.execute(sqlCreateVisiterTable());
 
     await insertDefaultData(db);
   }
-
-  /*
-  Future<void> initDB() async {
-    // Open the database and store the reference.
-    String path = await getDatabasesPath();
-
-    _database = (await openDatabase(join(path, 'Musee_Database.db'),
-        onCreate: (db, version) async {
-      await db.execute(sqlCreatePaysTable());
-      await db.execute(sqlCreateOuvrageTable());
-      await db.execute(sqlCreateBibliothequeTable());
-      await db.execute(sqlCreateMuseeTable());
-      await db.execute(sqlCreateVisiterTable());
-
-      await insertDefaultData(db);
-
-      print("====== DB INITED =======");
-    }, version: 1));
-  } */
 
   static String sqlCreatePaysTable() {
     return """
@@ -72,7 +53,7 @@ class DatabaseProvider {
         isbn TEXT PRIMARY KEY NOT NULL UNIQUE,
         nbpage INTEGER DEFAULT 0,
         titre	TEXT,
-        codepays TEXT DEFAULT NULL
+        codepays TEXT NOT NULL
       )
     """;
   }
@@ -140,15 +121,33 @@ class DatabaseProvider {
           numMus: 3, nomMus: "Musée de Ouidah", nbLivres: 4000, codePays: "bj"),
     ];
 
+    List<Ouvrage> ouvrages = [
+      Ouvrage(
+          isbn: '450545',
+          nbPage: 65,
+          titre: 'Un piège sans fin',
+          codePays: 'bj'),
+      Ouvrage(
+          isbn: '990545',
+          nbPage: 168,
+          titre: 'Un piège sans fin',
+          codePays: 'bj'),
+    ];
+
     // ---- Insertions -----
     // Pays
     for (var c in countries) {
-      await db.insert(Pays.table, c.toMap());
+      await db.insert(Pays.table, c.toJson());
     }
 
     // Museums
     for (var m in museums) {
       db.insert(Musee.table, m.toMap());
+    }
+
+    // Ouvrages
+    for (var o in ouvrages) {
+      db.insert(Ouvrage.table, o.toJson());
     }
   }
 }
